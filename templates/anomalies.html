@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% set active_page = "anomalies" %}
+
+{% block title %}Anomalies{% endblock %}
+
+{% block head %}
+{{ super() }}
+
+
+{% endblock %}
+
+{% block page_content %}
+<h1 class="cap text-center m-5">Anomalies</h1>
+{% if message %}
+{{ message }}
+{% endif %}
+
+    <div class="container">
+        <div class="col">
+            {% for anomaly in data %}
+                {% if anomaly['prevents'] %}
+                    <div class="row border border-success border-3 bg-white my-3" id="div-{{ loop.index0 }}">
+                {% else %}
+                    <div class="row border border-danger border-3 bg-white my-3" id="div-{{ loop.index0 }}">
+                {% endif %}
+                    <div class="card-body col-md-4 my-auto">
+                        <h3 class="card-title">{{ anomaly['name']}}</h3>
+                        <h5 class="card-subtitle mb-2 text-muted">Level: {{ anomaly['isolation_level'] }}</h5>
+                        <hr>
+                        <h6 class="card-subtitle mb-2 text-info">Description</h6>
+                        <p class="card-text">{{ anomaly['description'] }}</p>
+                        <h6 class="card-subtitle mb-2 text-warning">Consequence</h6>
+                        <p class="card-text">{{ anomaly['consequence'] }}</p>
+                        <form class="form-group" id="form-group{{ loop.index0 }}" action="run_test/?id={{ loop.index0 }}" method="post">
+                        {% if anomaly['prevents'] %}
+                            <button type="submit" form="form-group{{ loop.index0 }}" id="btnFetch" class="btn-click-action btn btn-success col-md-12">Run Test</button>
+                        {% else %}
+                            <button type="submit" form="form-group{{ loop.index0 }}" id="btnFetch" class="btn-click-action btn btn-danger col-md-12">Run Test</button>
+                        {% endif %}
+                        </form>
+                    </div>
+                    <div class="col-md-8">
+                        {% if path_exists(url_for('static', path='images/') + anomaly['url'] + ".png") %}
+                            <img src="{{ url_for('static', path='images/')}}{{anomaly['url']}}.png" class="img-fluid" alt="Responsive image">
+                        {% else %}
+                            <div class="d-flex justify-content-center align-items-center h-100 text-danger h2">Image not found</div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="web_name">
+            <h4 class="m-0 tex-overflow-ellipsis text-muted">
+                DB Race Condition visualizer
+            </h4>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item {{'active' if active_page == 'home' }}">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item {{'active' if active_page == 'transfers' }}">
+                    <a class="nav-link" href="/transfers">Transfers</a>
+                </li>
+                <li class="nav-item {{'active' if active_page == 'anomalies' }}">
+                    <a class="nav-link" href="/anomalies">Anomalies</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
